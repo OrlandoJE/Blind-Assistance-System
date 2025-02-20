@@ -1,3 +1,5 @@
-/test.jpg
-/animo.mp3
-/prueba.mp3
+*.mp3
+*.jpg
+media
+__pycache__/
+api_key.py
