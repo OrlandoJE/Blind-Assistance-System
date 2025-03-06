@@ -14,8 +14,8 @@ def getResponse(prompt, audio):
             {
                 "role": "user",
                 "content": prompt,
-                # "images": [image],
-                "raw": [audio]
+                "images": [image]
+                # "raw": [audio]
             },
         ],
     )
@@ -61,10 +61,26 @@ os.environ["IMAGEIO_FFMPEG_EXE"] = ffmpeg.get_ffmpeg_exe()
 image = "unnamed.jpg"
 audio = "prueba.mp3"
 
-# print(getResponse("descríbeme la imagen en español, por favor", image))
+print(getResponse("Descríbeme la imagen en español, por favor", image))
 
-ola = 1
 
-while ola == 1:
-    ola = input("Ingrese 1 para continuar: ")
-    print(getResponse("Describe el archivo proporcionado", audio))
+def getResponse(prompt, audio):
+    responseLlama = ChatResponse = chat(
+        model="llama3.2-vision",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+                "images": [image],
+                # "raw": [audio]
+            },
+        ],
+    )
+    return responseLlama.message.content
+
+
+# ola = 1
+
+# while ola == 1:
+#     ola = input("Ingrese 1 para continuar: ")
+#     print(getResponse("Describe el archivo proporcionado", audio))

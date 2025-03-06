@@ -5,6 +5,11 @@ import os
 import websockets
 from google import genai
 import base64
+
+import sys
+
+# Add the parent directory to the system path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from api_key import api_key
 
 # Load API key from environment
@@ -43,7 +48,7 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
                                     if chunk["mime_type"] == "audio/pcm":
                                         await session.send(
                                             {
-                                                "mime_type": "audio/pcm",
+                                                # "mime_type": "audio/pcm",
                                                 "data": chunk["data"],
                                             }
                                         )
@@ -51,7 +56,7 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
                                     elif chunk["mime_type"] == "image/jpeg":
                                         await session.send(
                                             {
-                                                "mime_type": "image/jpeg",
+                                                # "mime_type": "image/jpeg",
                                                 "data": chunk["data"],
                                             }
                                         )
@@ -138,11 +143,11 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
 
 
 async def main() -> None:
-    async with websockets.serve(gemini_session_handler, "localhost", portID):
-        print(f'Running websocket server localhost:{portID}...')
+    async with websockets.serve(gemini_session_handler, "localhost", port):
+        print(f'Running websocket server localhost:{port}...')
         await asyncio.Future()  # Keep the server running indefinitely
 
-portID = 9090
+port = 9090
 
 if __name__ == "__main__":
     asyncio.run(main())

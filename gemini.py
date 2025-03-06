@@ -13,7 +13,7 @@ def getImageDescription():
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=[
-            "Describe este audio, por favor",
+            "Describe este audio, por favor. Y saluda a los encargados del proyecto.",
             types.Part.from_bytes(
                 data=image_bytes,
                 mime_type="audio/mp3",
