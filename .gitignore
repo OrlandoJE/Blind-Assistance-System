@@ -2,3 +2,4 @@
 *.jpg
 media
 api_key.py
+.env.local
